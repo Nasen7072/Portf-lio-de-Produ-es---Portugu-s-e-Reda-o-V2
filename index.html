@@ -3,48 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio – Língua Portuguesa e Redação</title>
-
-    <!-- LINK DO CSS -->
+    <title>Portfólio – Produções de Língua Portuguesa e Redação</title>
     <link rel="stylesheet" href="css/style.css">
+
+    meu-portfolio/
+│── index.html
+│── /css
+│     └── style.css
+│── /js
+│     └── script.js
+│── /img
+│     └── (imagens das atividades)
+
 </head>
+
 <body>
 
-<header>
-    <h1>Portfólio – Língua Portuguesa e Redação</h1>
-    <nav>
-        <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#producoes">Produções</a></li>
-            <li><a href="#galeria">Galeria</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>Portfólio – Língua Portuguesa e Redação</h1>
+        <nav id="menu">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#producoes">Produções</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button id="btn-menu" aria-label="Abrir Menu">☰</button>
+        </nav>
+    </header>
 
-<main>
-    <section id="inicio">
-        <h2>Boas-vindas</h2>
-        <p>Este é o meu portfólio de atividades.</p>
-    </section>
+    <main>
 
-    <section id="producoes">
-        <h2>Produções</h2>
+        <!-- Seção de abertura -->
+        <section id="inicio" class="secao">
+            <h2>Encerramento do Ano Letivo</h2>
+            <p>Este portfólio reúne as 15 produções realizadas ao longo do ano nas disciplinas de Língua Portuguesa e Redação.</p>
+            <p>Clique abaixo para explorar as atividades!</p>
+        </section>
 
-        <article>
-            <h3>Produção 1</h3>
-            <p>Descrição da atividade.</p>
-        </article>
+        <!-- Seção das produções -->
+        <section id="producoes" class="secao">
+            <h2>Minhas Produções</h2>
 
-        <article>
-            <h3>Produção 2</h3>
-            <p>Descrição da atividade.</p>
-        </article>
-    </section>
-</main>
+            <div class="grid">
 
-<footer>
-    <p>Portfólio © 2024</p>
-</footer>
+                <!-- EXEMPLO DE UM BLOCO DE PRODUÇÃO (repita 15 vezes) -->
+                <article class="card">
+                    <img src="img/producao1.jpg" alt="Produção 1">
+                    <h3>Produção 1 – Título do Texto</h3>
+                    <p>Breve descrição da atividade realizada.</p>
+                    <a href="#" class="botao">Ver mais</a>
+                </article>
 
+                <article class="card">
+                    <img src="img/producao2.jpg" alt="Produção 2">
+                    <h3>Produção 2 – Título do Texto</h3>
+                    <p>Breve descrição da atividade realizada.</p>
+                    <a href="#" class="botao">Ver mais</a>
+                </article>
+
+                <!-- Você deverá colocar aqui os 15 cards -->
+
+            </div>
+        </section>
+
+        <!-- Galeria de fotos -->
+        <section id="galeria" class="secao">
+            <h2>Galeria de Fotos</h2>
+            <div class="galeria-container">
+                <img src="img/galeria1.jpg" alt="Foto de atividade">
+                <img src="img/galeria2.jpg" alt="Foto de trabalho">
+                <img src="img/galeria3.jpg" alt="Sala de aula">
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="secao">
+            <h2>Contato</h2>
+            <form id="form-contato">
+                <label>Nome:</label>
+                <input type="text" required>
+
+                <label>Email:</label>
+                <input type="email" required>
+
+                <label>Mensagem:</label>
+                <textarea required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+
+            <p id="msg-sucesso" class="hidden">Mensagem enviada com sucesso!</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Portfólio Escolar – Encerramento do Ano Letivo © 2024</p>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
