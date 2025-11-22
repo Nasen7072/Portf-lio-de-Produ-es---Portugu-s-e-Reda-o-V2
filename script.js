@@ -1,16 +1,16 @@
 // MENU MOBILE
-const btnMenu = document.getElementById("btn-menu");
-const menuLista = document.querySelector("nav ul");
+const btn = document.getElementById("btn-menu");
+const lista = document.getElementById("menu-lista");
 
-btnMenu.addEventListener("click", () => {
-    menuLista.classList.toggle("show");
+btn.addEventListener("click", () => {
+    lista.classList.toggle("show");
 });
 
-// FORMULÁRIO - MENSAGEM DE SUCESSO
+// MENSAGEM DO FORMULÁRIO
 const form = document.getElementById("form-contato");
-const msg = document.getElementById("msg-sucesso");
+const msg = document.getElementById("msg");
 
-form.addEventListener("submit", function(e) {
+form.addEventListener("submit", e => {
     e.preventDefault();
     msg.classList.remove("hidden");
     form.reset();
