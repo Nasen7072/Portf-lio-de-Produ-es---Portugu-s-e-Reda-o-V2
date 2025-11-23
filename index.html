@@ -16,9 +16,9 @@
                 <p>Língua Portuguesa e Redação</p>
             </div>
             <nav>
-                <div class="hamburger" id="hamburger">
+                <button class="hamburger" id="hamburger" aria-label="Menu">
                     <i class="fas fa-bars"></i>
-                </div>
+                </button>
                 <ul id="nav-menu">
                     <li><a href="#producoes">Produções</a></li>
                     <li><a href="#sobre">Sobre</a></li>
@@ -31,7 +31,7 @@
                             <i class="fas fa-music"></i>
                         </button>
                         <div class="volume-control">
-                            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volume-slider">
+                            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volume-slider" aria-label="Controle de volume">
                         </div>
                     </li>
                 </ul>
@@ -67,7 +67,7 @@
                     <p>Através destas produções, pude explorar diferentes gêneros textuais, técnicas de argumentação e elementos da língua portuguesa, consolidando meu aprendizado e demonstrando minha evolução como escritor e leitor crítico.</p>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Estudante escrevendo">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Estudante escrevendo em um caderno">
                 </div>
             </div>
         </div>
@@ -109,21 +109,13 @@
         </div>
     </footer>
 
-    <!-- Áudio com múltiplas fontes e fallback -->
-<audio id="background-music" loop preload="auto" style="display: none;">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1d212bc2f8.mp3?filename=relaxing-calm-acoustic-guitar-amp-pad-143039.mp3" type="audio/mpeg">
-    <source src="https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3" type="audio/mpeg">
-    <source src="https://assets.codepen.io/1468070/lofi-study-1.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio HTML5.
-</audio>
-
     <!-- Music Player -->
     <div class="music-player" id="music-player">
         <div class="music-info">
             <div class="music-title">LoFi Study</div>
             <div class="music-artist">Chill Vibes</div>
         </div>
-        <button class="mini-music-toggle" id="mini-music-toggle">
+        <button class="mini-music-toggle" id="mini-music-toggle" aria-label="Reproduzir música">
             <i class="fas fa-play" id="play-icon"></i>
         </button>
     </div>
@@ -131,7 +123,7 @@
     <!-- Modal -->
     <div class="modal" id="production-modal">
         <div class="modal-content">
-            <button class="close-modal" id="close-modal">
+            <button class="close-modal" id="close-modal" aria-label="Fechar">
                 <i class="fas fa-times"></i>
             </button>
             <h2 id="modal-title">Título da Produção</h2>
@@ -141,19 +133,14 @@
         </div>
     </div>
 
-    <!-- Áudio com fonte alternativa -->
-    <audio id="background-music" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_eb5dfb3d95.mp3?filename=lofi-chill-medium-version-159456.mp3" type="audio/mpeg">
+    <!-- Áudio Único - Removido elementos duplicados -->
+    <audio id="background-music" loop preload="metadata">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1d212bc2f8.mp3?filename=relaxing-calm-acoustic-guitar-amp-pad-143039.mp3" type="audio/mpeg">
         <source src="https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3" type="audio/mpeg">
+        <source src="https://assets.codepen.io/1468070/lofi-study-1.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
     </audio>
 
     <script src="script.js"></script>
-
-    <!-- Adicionar esta div para mensagens de erro -->
-<div id="audio-error-message" style="display: none; position: fixed; top: 20px; right: 20px; background: #e94560; color: white; padding: 1rem; border-radius: 8px; z-index: 3000; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-    <p style="margin: 0; font-weight: bold;">Erro de Áudio</p>
-    <p style="margin: 0.5rem 0 0 0;">Clique no botão de música para tentar novamente.</p>
-</div>
-    
 </body>
 </html>
