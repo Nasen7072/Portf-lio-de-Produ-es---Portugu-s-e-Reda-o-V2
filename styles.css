@@ -140,7 +140,7 @@ nav a:hover {
     color: var(--highlight-color);
 }
 
-.theme-toggle, .music-toggle {
+.theme-toggle, .music-toggle, .mini-music-toggle {
     background: none;
     border: none;
     color: var(--text-light);
@@ -156,7 +156,7 @@ nav a:hover {
     height: 40px;
 }
 
-.theme-toggle:hover, .music-toggle:hover {
+.theme-toggle:hover, .music-toggle:hover, .mini-music-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
     transform: rotate(15deg) scale(1.1);
 }
@@ -200,6 +200,12 @@ nav a:hover {
     background: none;
     border: none;
     padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.hamburger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Hero Section */
@@ -693,7 +699,7 @@ footer {
     opacity: 0.7;
 }
 
-.music-player .music-toggle {
+.music-player .mini-music-toggle {
     background: none;
     border: none;
     color: var(--text-color);
@@ -709,7 +715,7 @@ footer {
     height: 40px;
 }
 
-.music-player .music-toggle:hover {
+.music-player .mini-music-toggle:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -746,6 +752,10 @@ footer {
         font-size: 2.2rem;
     }
 
+    .hero p {
+        font-size: 1.1rem;
+    }
+
     .productions-grid {
         grid-template-columns: 1fr;
     }
@@ -767,6 +777,10 @@ footer {
     .controls {
         flex-wrap: wrap;
         justify-content: center;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
     }
 }
 
