@@ -192,187 +192,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função para tocar/pausar música - CORRIGIDA
+    // Função para tocar/pausar música - VERSÃO SIMPLIFICADA
     function toggleMusic() {
-        console.log('🎵 Botão de música clicado');
-        
         if (isPlaying) {
-            // Pausar música
             elements.backgroundMusic.pause();
             updateMusicUI(false);
             isPlaying = false;
-            console.log('⏸️ Música pausada');
         } else {
-            // Tentar tocar música
-            console.log('▶️ Tentando reproduzir música local...');
-            
-            const playPromise = elements.backgroundMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('✅ Música local reproduzida com sucesso');
-                    updateMusicUI(true);
-                    isPlaying = true;
-                }).catch(error => {
-                    console.error('❌ Erro ao reproduzir:', error);
-                    showMusicInstructions();
-                    
-                    // Tentar novamente após interação do usuário
-                    const retryPlay = () => {
-                        elements.backgroundMusic.play().then(() => {
-                            console.log('✅ Música reproduzida após interação');
-                            updateMusicUI(true);
-                            isPlaying = true;
-                            document.removeEventListener('click', retryPlay);
-                        }).catch(e => {
-                            console.error('❌ Falha na reprodução após interação:', e);
-                            showAudioError();
-                        });
-                    };
-                    document.addEventListener('click', retryPlay, { once: true });
-                });
-            }
+            elements.backgroundMusic.play().then(() => {
+                updateMusicUI(true);
+                isPlaying = true;
+            }).catch(error => {
+                console.log('Clique em qualquer lugar da página primeiro para ativar o áudio');
+            });
         }
-    }
-
-    // Função para mostrar erro de áudio
-    function showAudioError() {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            backdrop-filter: blur(5px);
-        `;
-        
-        overlay.innerHTML = `
-            <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; text-align: center; max-width: 400px; margin: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🔇</div>
-                <h3 style="color: var(--text-color); margin-bottom: 1rem;">Arquivo de Áudio Não Encontrado</h3>
-                <p style="color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.5;">
-                    Para que a música funcione, você precisa:
-                    <br><br>
-                    1. <strong>Renomear seu arquivo de áudio</strong> para "audio.mp3"
-                    <br>
-                    2. <strong>Colocar na mesma pasta</strong> do arquivo HTML
-                </p>
-                <button onclick="this.parentElement.parentElement.remove()" 
-                        style="background: var(--highlight-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
-                    Entendi
-                </button>
-            </div>
-        `;
-        
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                overlay.remove();
-            }
-        });
-        
-        document.body.appendChild(overlay);
     }
 
     // Função para atualizar a UI da música
     function updateMusicUI(playing) {
         if (playing) {
-            // Música tocando
             elements.playIcon.className = 'fas fa-pause';
             elements.musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
             elements.musicToggle.classList.add('playing', 'active');
             elements.miniMusicToggle.classList.add('active');
             elements.musicPlayer.classList.add('playing');
-            
-            // Adicionar animação de pulso
             elements.musicToggle.style.animation = 'pulse 2s infinite';
         } else {
-            // Música pausada
             elements.playIcon.className = 'fas fa-play';
             elements.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
             elements.musicToggle.classList.remove('playing', 'active');
             elements.miniMusicToggle.classList.remove('active');
             elements.musicPlayer.classList.remove('playing');
-            
-            // Remover animação
             elements.musicToggle.style.animation = 'none';
         }
     }
 
-    // Função para mostrar instruções de áudio
-    function showMusicInstructions() {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            backdrop-filter: blur(5px);
-        `;
-        
-        overlay.innerHTML = `
-            <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; text-align: center; max-width: 400px; margin: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🎵</div>
-                <h3 style="color: var(--text-color); margin-bottom: 1rem;">Ativar Áudio</h3>
-                <p style="color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.5;">
-                    Para reproduzir a música, você precisa interagir com a página primeiro.
-                    <br><br>
-                    <strong>Clique em qualquer lugar para ativar o áudio.</strong>
-                </p>
-                <button onclick="this.parentElement.parentElement.remove()" 
-                        style="background: var(--highlight-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
-                    Entendi
-                </button>
-            </div>
-        `;
-        
-        overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) {
-                overlay.remove();
-                // Tentar reproduzir após clicar no overlay
-                elements.backgroundMusic.play().then(() => {
-                    updateMusicUI(true);
-                    isPlaying = true;
-                });
-            }
-        });
-        
-        document.body.appendChild(overlay);
-    }
-
-    // Função para ajustar volume com feedback
+    // Função para ajustar volume
     function adjustVolume() {
         const volume = elements.volumeSlider.value / 100;
         elements.backgroundMusic.volume = volume;
-        
-        // Feedback visual do volume no ícone
-        if (volume === 0) {
-            if (!isPlaying) elements.musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        } else if (volume < 0.5) {
-            if (!isPlaying) elements.musicToggle.innerHTML = '<i class="fas fa-volume-down"></i>';
-        } else {
-            if (!isPlaying) elements.musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-        }
-        
-        // Restaurar ícone após 2 segundos se não estiver tocando
-        if (!isPlaying) {
-            setTimeout(() => {
-                if (!isPlaying) {
-                    elements.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-                }
-            }, 2000);
-        }
     }
 
     // Função para expandir player
@@ -394,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `).join('');
 
-        // Event listeners para os botões
         elements.productionsContainer.addEventListener('click', function(e) {
             if (e.target.classList.contains('read-more')) {
                 e.preventDefault();
@@ -458,12 +315,10 @@ document.addEventListener('DOMContentLoaded', function() {
         elements.musicPlayer?.addEventListener('click', toggleMusicPlayer);
         elements.volumeSlider?.addEventListener('input', adjustVolume);
 
-        // Fechar modal ao clicar fora
         window.addEventListener('click', (e) => {
             if (e.target === elements.modal) closeModal();
         });
 
-        // Fechar menu ao redimensionar
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 elements.navMenu.classList.remove('active');
@@ -479,38 +334,13 @@ document.addEventListener('DOMContentLoaded', function() {
         initTheme();
         setupEventListeners();
         
-        // Configurar áudio - CORRIGIDO
+        // Configurar áudio
         if (elements.backgroundMusic) {
-            // Definir volume inicial baseado no slider
             elements.backgroundMusic.volume = elements.volumeSlider.value / 100;
-            
-            // Configurar eventos do áudio para debug
-            elements.backgroundMusic.addEventListener('loadeddata', () => {
-                console.log('🔊 Áudio carregado com sucesso');
-            });
-            
-            elements.backgroundMusic.addEventListener('canplaythrough', () => {
-                console.log('✅ Áudio pronto para reprodução completa');
-            });
-            
-            elements.backgroundMusic.addEventListener('error', (e) => {
-                console.error('❌ Erro no elemento de áudio:', e);
-                console.log('Código de erro:', elements.backgroundMusic.error);
-                console.log('💡 Dica: Renomeie seu arquivo para "audio.mp3" e coloque na mesma pasta do HTML');
-            });
-            
-            console.log('🔊 Áudio configurado - Volume:', elements.backgroundMusic.volume);
-            console.log('📁 Fonte do áudio:', elements.backgroundMusic.src);
-        } else {
-            console.error('❌ Elemento background-music não encontrado');
+            console.log('🔊 Áudio configurado');
         }
         
         console.log('✅ Site inicializado com sucesso!');
-        
-        // Adicionar instruções iniciais
-        setTimeout(() => {
-            console.log('💡 Dica: Clique no botão de música para reproduzir áudio ambiente');
-        }, 1000);
     }
 
     // Iniciar
