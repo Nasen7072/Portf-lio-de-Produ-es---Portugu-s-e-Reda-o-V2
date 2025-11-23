@@ -192,36 +192,120 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função para tocar/pausar música
-    function toggleMusic() {
-        console.log('🎵 Botão de música clicado');
+ // Função para tocar/pausar música
+function toggleMusic() {
+    console.log('🎵 Botão de música clicado');
+    
+    if (isPlaying) {
+        // Pausar música
+        elements.backgroundMusic.pause();
+        updateMusicUI(false);
+        isPlaying = false;
+        console.log('⏸️ Música pausada');
+    } else {
+        // Tentar tocar música
+        console.log('▶️ Tentando reproduzir música...');
+        const playPromise = elements.backgroundMusic.play();
         
-        if (isPlaying) {
-            // Pausar
-            elements.backgroundMusic.pause();
-            elements.playIcon.className = 'fas fa-play';
-            elements.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-            isPlaying = false;
-            console.log('⏸️ Música pausada');
-        } else {
-            // Tentar tocar
-            console.log('▶️ Tentando reproduzir música...');
-            const playPromise = elements.backgroundMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('✅ Música reproduzida com sucesso');
-                    elements.playIcon.className = 'fas fa-pause';
-                    elements.musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-                    isPlaying = true;
-                }).catch(error => {
-                    console.error('❌ Erro ao reproduzir:', error);
-                    alert('🎵 Clique em qualquer lugar da página primeiro para ativar o áudio, depois clique no botão de música novamente.');
-                });
-            }
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('✅ Música reproduzida com sucesso');
+                updateMusicUI(true);
+                isPlaying = true;
+            }).catch(error => {
+                console.error('❌ Erro ao reproduzir:', error);
+                showMusicInstructions();
+            });
         }
     }
+}
 
+// Função para atualizar a UI da música
+function updateMusicUI(playing) {
+    if (playing) {
+        // Música tocando
+        elements.playIcon.className = 'fas fa-pause';
+        elements.musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+        elements.musicToggle.classList.add('playing', 'active');
+        elements.miniMusicToggle.classList.add('active');
+        elements.musicPlayer.classList.add('playing');
+    } else {
+        // Música pausada
+        elements.playIcon.className = 'fas fa-play';
+        elements.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+        elements.musicToggle.classList.remove('playing', 'active');
+        elements.miniMusicToggle.classList.remove('active');
+        elements.musicPlayer.classList.remove('playing');
+    }
+}
+
+// Função para mostrar instruções de áudio
+function showMusicInstructions() {
+    // Criar overlay de instruções
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(5px);
+    `;
+    
+    overlay.innerHTML = `
+        <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; text-align: center; max-width: 400px; margin: 1rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎵</div>
+            <h3 style="color: var(--text-color); margin-bottom: 1rem;">Ativar Áudio</h3>
+            <p style="color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.5;">
+                Para reproduzir a música, você precisa interagir com a página primeiro.
+                <br><br>
+                <strong>Clique em qualquer lugar desta mensagem para ativar o áudio.</strong>
+            </p>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: var(--highlight-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
+                Entendi
+            </button>
+        </div>
+    `;
+    
+    // Remover overlay quando clicar nele
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+            overlay.remove();
+        }
+    });
+    
+    document.body.appendChild(overlay);
+}
+
+// Função para ajustar volume com feedback
+function adjustVolume() {
+    const volume = elements.volumeSlider.value / 100;
+    elements.backgroundMusic.volume = volume;
+    
+    // Feedback visual do volume
+    if (volume === 0) {
+        elements.musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else if (volume < 0.5) {
+        elements.musicToggle.innerHTML = '<i class="fas fa-volume-down"></i>';
+    } else {
+        elements.musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+    
+    // Restaurar ícone original se não estiver tocando
+    if (!isPlaying) {
+        setTimeout(() => {
+            if (!isPlaying) {
+                elements.musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            }
+        }, 1000);
+    }
+}
     // Função para expandir player
     function toggleMusicPlayer() {
         isExpanded = !isExpanded;
