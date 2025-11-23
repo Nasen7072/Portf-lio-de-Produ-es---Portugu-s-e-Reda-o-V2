@@ -235,7 +235,7 @@ function renderProductions(filter = 'all') {
     attachCardEventListeners();
 }
 
-// ===== TOGGLE DE TEMA CLARO/ESCURO =====
+// ===== TOGGLE DE TEMA CLARO/ESCURO CORRIGIDO =====
 themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark-theme');
     const icon = themeToggle.querySelector('i');
@@ -244,12 +244,26 @@ themeToggle.addEventListener('click', () => {
     if (document.body.classList.contains('dark-theme')) {
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
-        // Aqui você pode adicionar mais lógica para tema escuro
+        localStorage.setItem('theme', 'dark');
     } else {
         icon.classList.remove('fa-sun');
         icon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
     }
 });
+
+// Verificar tema salvo ao carregar a página
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.body.classList.add('dark-theme');
+        const icon = themeToggle.querySelector('i');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    }
+}
 
 // ===== MODAL EXPANDIDO =====
 function openModal(id) {
@@ -393,4 +407,28 @@ window.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModalFunc();
     }
+});
+}
+
+// ===== INICIALIZAÇÃO COMPLETA =====
+document.addEventListener('DOMContentLoaded', () => {
+    renderProductions();      // Renderiza produções
+    calculateTotals();        // Inicia contadores
+    initAnimations();         // Inicia animações
+    initTheme();              // INICIALIZA O TEMA (LINHA NOVA)
+    attachCardEventListeners(); // Aplica event listeners
+    
+    // Scroll suave para âncoras
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
 });
