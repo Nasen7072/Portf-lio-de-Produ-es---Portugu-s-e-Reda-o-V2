@@ -826,3 +826,124 @@ footer {
 .music-player.playing .mini-music-toggle {
     color: white;
 }
+
+/* Correções para os controles de música */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--highlight-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--highlight-color);
+    cursor: pointer;
+    border: none;
+}
+
+/* Estados dos botões de música */
+.music-toggle.active,
+.mini-music-toggle.active {
+    background-color: var(--highlight-color);
+    color: white;
+}
+
+.music-player.playing {
+    background: linear-gradient(135deg, var(--highlight-color), #4361ee);
+}
+
+.music-player.playing .mini-music-toggle {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Feedback visual para o player */
+.music-player {
+    transition: all 0.3s ease;
+}
+
+.music-player:hover {
+    transform: scale(1.05);
+}
+
+/* Responsividade para controles */
+@media (max-width: 768px) {
+    .volume-control {
+        display: flex !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: var(--primary-color);
+        padding: 10px;
+        border-radius: var(--border-radius);
+        margin-top: 5px;
+        box-shadow: var(--shadow);
+        z-index: 1000;
+    }
+    
+    .controls {
+        position: relative;
+    }
+}
+
+/* Animações para ícones */
+.theme-toggle i,
+.music-toggle i,
+.mini-music-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i,
+.music-toggle:hover i,
+.mini-music-toggle:hover i {
+    transform: scale(1.1);
+}
+
+/* Estados dos botões quando música está tocando */
+.music-toggle.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(233, 69, 96, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(233, 69, 96, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(233, 69, 96, 0);
+    }
+}
