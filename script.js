@@ -159,15 +159,7 @@ const playIcon = document.getElementById('play-icon');
 // Estado da música
 let isPlaying = false;
 let isExpanded = false;
-let audioContext = null;
-
-// Função para inicializar o contexto de áudio
-function initAudioContext() {
-    if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    return audioContext;
-}
+let userInteracted = false;
 
 // Função para alternar modo claro/escuro
 function toggleTheme() {
@@ -197,92 +189,92 @@ function initTheme() {
 }
 
 // Função para tocar/pausar música
-async function toggleMusic() {
-    try {
-        // Inicializar contexto de áudio se necessário
-        initAudioContext();
-        
-        if (audioContext.state === 'suspended') {
-            await audioContext.resume();
+function toggleMusic() {
+    if (!userInteracted) {
+        userInteracted = true;
+        // Primeira interação - tentar desbloquear áudio
+        try {
+            // Criar e destruir um contexto de áudio rápido para desbloquear
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                const audioContext = new AudioContext();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                gainNode.gain.value = 0.001; // Volume quase zero
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.001);
+            }
+        } catch (error) {
+            console.log('Não foi possível desbloquear áudio automaticamente:', error);
         }
-
-        if (isPlaying) {
-            // Pausar música
-            backgroundMusic.pause();
-            playIcon.className = 'fas fa-play';
-            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-            isPlaying = false;
-        } else {
-            // Tentar tocar música
-            const playPromise = backgroundMusic.play();
-            
-            if (playPromise !== undefined) {
-                await playPromise;
+    }
+    
+    if (isPlaying) {
+        // Pausar música
+        backgroundMusic.pause();
+        playIcon.className = 'fas fa-play';
+        musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+        isPlaying = false;
+    } else {
+        // Tentar tocar música
+        const playPromise = backgroundMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Sucesso
                 playIcon.className = 'fas fa-pause';
                 musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
                 isPlaying = true;
-            }
+            }).catch(error => {
+                // Erro
+                console.error('Erro ao reproduzir áudio:', error);
+                showMusicError();
+            });
         }
-    } catch (error) {
-        console.error('Erro ao controlar áudio:', error);
-        showMusicError('Erro ao reproduzir áudio. Tente novamente.');
     }
 }
 
 // Função para mostrar erro de música
-function showMusicError(message) {
-    // Remover mensagens de erro anteriores
-    const existingError = document.querySelector('.music-error');
-    if (existingError) {
-        existingError.remove();
-    }
-
-    const errorMsg = document.createElement('div');
-    errorMsg.className = 'music-error';
-    errorMsg.style.cssText = `
+function showMusicError() {
+    // Criar mensagem de erro
+    const errorDiv = document.createElement('div');
+    errorDiv.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
         background: #e94560;
         color: white;
-        padding: 1rem;
+        padding: 15px;
         border-radius: 8px;
-        z-index: 3000;
+        z-index: 10000;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         max-width: 300px;
-        font-size: 0.9rem;
+        font-family: Arial, sans-serif;
     `;
-    errorMsg.innerHTML = `
-        <p style="margin: 0 0 0.5rem 0; font-weight: bold;">Erro de Áudio</p>
-        <p style="margin: 0;">${message}</p>
-    `;
-    document.body.appendChild(errorMsg);
     
+    errorDiv.innerHTML = `
+        <div style="margin-bottom: 8px; font-weight: bold; font-size: 16px;">❌ Erro de Áudio</div>
+        <div style="font-size: 14px; line-height: 1.4;">
+            Não foi possível reproduzir a música. 
+            <br>Tente:
+            <br>• Clicar novamente no botão
+            <br>• Verificar sua conexão
+            <br>• Atualizar a página
+        </div>
+    `;
+    
+    document.body.appendChild(errorDiv);
+    
+    // Remover após 5 segundos
     setTimeout(() => {
-        errorMsg.remove();
+        if (errorDiv.parentNode) {
+            errorDiv.parentNode.removeChild(errorDiv);
+        }
     }, 5000);
-}
-
-// Função para criar áudio alternativo
-function createAlternativeAudio() {
-    // Criar um áudio simples usando Web Audio API como fallback
-    try {
-        const context = initAudioContext();
-        const oscillator = context.createOscillator();
-        const gainNode = context.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(context.destination);
-        
-        oscillator.type = 'sine';
-        oscillator.frequency.value = 220;
-        gainNode.gain.value = 0.1;
-        
-        return { oscillator, gainNode, context };
-    } catch (error) {
-        console.error('Erro ao criar áudio alternativo:', error);
-        return null;
-    }
 }
 
 // Função para expandir/contrair player de música
@@ -310,6 +302,8 @@ function adjustVolume() {
 
 // Função para renderizar as produções
 function renderProductions() {
+    if (!productionsContainer) return;
+    
     productionsContainer.innerHTML = '';
     
     productions.forEach(production => {
@@ -339,7 +333,7 @@ function renderProductions() {
 // Função para abrir o modal
 function openModal(id) {
     const production = productions.find(p => p.id === id);
-    if (production) {
+    if (production && modal && modalTitle && modalBody) {
         modalTitle.textContent = production.title;
         modalBody.innerHTML = production.content;
         modal.style.display = 'flex';
@@ -349,8 +343,10 @@ function openModal(id) {
 
 // Função para fechar o modal
 function closeModalFunc() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
 
 // Função para calcular totais
@@ -358,8 +354,8 @@ function calculateTotals() {
     const totalPages = productions.reduce((sum, production) => sum + production.pages, 0);
     const totalWords = productions.reduce((sum, production) => sum + production.words, 0);
     
-    animateCounter(pageCount, totalPages);
-    animateCounter(wordCount, totalWords);
+    if (pageCount) animateCounter(pageCount, totalPages);
+    if (wordCount) animateCounter(wordCount, totalWords);
 }
 
 // Função para animar contadores
@@ -378,24 +374,47 @@ function animateCounter(element, target) {
 }
 
 // Menu hamburguer
-hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-});
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        if (navMenu) {
+            navMenu.classList.toggle('active');
+        }
+    });
+}
 
 // Fechar menu ao clicar em um link
 document.querySelectorAll('#nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+        if (navMenu) {
+            navMenu.classList.remove('active');
+        }
     });
 });
 
 // Event listeners
-closeModal.addEventListener('click', closeModalFunc);
-themeToggle.addEventListener('click', toggleTheme);
-musicToggle.addEventListener('click', toggleMusic);
-miniMusicToggle.addEventListener('click', toggleMusic);
-musicPlayer.addEventListener('click', toggleMusicPlayer);
-volumeSlider.addEventListener('input', adjustVolume);
+if (closeModal) {
+    closeModal.addEventListener('click', closeModalFunc);
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+}
+
+if (musicToggle) {
+    musicToggle.addEventListener('click', toggleMusic);
+}
+
+if (miniMusicToggle) {
+    miniMusicToggle.addEventListener('click', toggleMusic);
+}
+
+if (musicPlayer) {
+    musicPlayer.addEventListener('click', toggleMusicPlayer);
+}
+
+if (volumeSlider) {
+    volumeSlider.addEventListener('input', adjustVolume);
+}
 
 // Fechar modal ao clicar fora
 window.addEventListener('click', (e) => {
@@ -406,46 +425,57 @@ window.addEventListener('click', (e) => {
 
 // Fechar menu ao redimensionar a tela
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 768 && navMenu) {
         navMenu.classList.remove('active');
     }
 });
 
-// Inicialização do áudio quando o usuário interage com a página
-document.addEventListener('click', async () => {
-    try {
-        // Tentar inicializar o contexto de áudio na primeira interação do usuário
-        if (!audioContext) {
-            initAudioContext();
-            if (audioContext.state === 'suspended') {
-                await audioContext.resume();
-            }
-        }
-    } catch (error) {
-        console.log('Contexto de áudio não disponível:', error);
-    }
+// Permitir interação do usuário para desbloquear áudio
+document.addEventListener('click', () => {
+    userInteracted = true;
 });
 
-// Inicialização
+// Configurar eventos de áudio
+if (backgroundMusic) {
+    backgroundMusic.addEventListener('error', (e) => {
+        console.error('Erro no elemento de áudio:', e);
+    });
+    
+    backgroundMusic.addEventListener('canplay', () => {
+        console.log('Áudio pode ser reproduzido');
+    });
+}
+
+// Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Inicializando site...');
+    
+    // Verificar se todos os elementos necessários existem
+    if (!productionsContainer) {
+        console.error('Elemento productions-container não encontrado');
+        return;
+    }
+    
     renderProductions();
     calculateTotals();
     initTheme();
     
-    // Configurar música
-    backgroundMusic.volume = 0.5;
-    backgroundMusic.preload = 'auto';
+    // Configurar volume inicial
+    if (backgroundMusic && volumeSlider) {
+        backgroundMusic.volume = volumeSlider.value / 100;
+    }
     
-    // Configurar eventos de áudio para melhor tratamento de erros
-    backgroundMusic.addEventListener('error', (e) => {
-        console.error('Erro no elemento de áudio:', e);
-        showMusicError('Falha ao carregar o áudio. Verifique sua conexão.');
-    });
-    
-    backgroundMusic.addEventListener('canplaythrough', () => {
-        console.log('Áudio pronto para reprodução');
-    });
-    
-    console.log('Site carregado com sucesso!');
+    console.log('Site inicializado com sucesso!');
     console.log('Clique no botão de música para reproduzir o áudio.');
 });
+
+// Fallback caso DOMContentLoaded já tenha ocorrido
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    setTimeout(() => {
+        renderProductions();
+        calculateTotals();
+        initTheme();
+    }, 100);
+}
