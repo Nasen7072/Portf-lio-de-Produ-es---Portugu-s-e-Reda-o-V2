@@ -159,6 +159,7 @@ const playIcon = document.getElementById('play-icon');
 // Estado da música
 let isPlaying = false;
 let isExpanded = false;
+let userInteracted = false;
 
 // Função para alternar modo claro/escuro
 function toggleTheme() {
@@ -189,26 +190,60 @@ function initTheme() {
 
 // Função para tocar/pausar música
 function toggleMusic() {
+    if (!userInteracted) {
+        userInteracted = true;
+        // Criar contexto de áudio para desbloquear autoplay
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        oscillator.connect(audioContext.destination);
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.001);
+    }
+    
     if (isPlaying) {
         backgroundMusic.pause();
         playIcon.className = 'fas fa-play';
+        musicToggle.innerHTML = '<i class="fas fa-music"></i>';
     } else {
-        // Tentar tocar a música
         const playPromise = backgroundMusic.play();
         
         if (playPromise !== undefined) {
             playPromise.then(() => {
-                // Reprodução iniciada com sucesso
                 playIcon.className = 'fas fa-pause';
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
                 isPlaying = true;
             }).catch(error => {
-                // Autoplay foi bloqueado
-                console.log("Autoplay bloqueado:", error);
-                alert('Clique no botão de música para reproduzir o áudio. Alguns navegadores bloqueiam a reprodução automática.');
+                console.log("Erro ao reproduzir áudio:", error);
+                showMusicError();
             });
         }
     }
     isPlaying = !isPlaying;
+}
+
+// Função para mostrar erro de música
+function showMusicError() {
+    const errorMsg = document.createElement('div');
+    errorMsg.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #e94560;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        z-index: 3000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    `;
+    errorMsg.innerHTML = `
+        <p><strong>Erro de Áudio</strong></p>
+        <p>Clique no botão de música para tentar novamente.</p>
+    `;
+    document.body.appendChild(errorMsg);
+    
+    setTimeout(() => {
+        errorMsg.remove();
+    }, 5000);
 }
 
 // Função para expandir/contrair player de música
@@ -269,14 +304,14 @@ function openModal(id) {
         modalTitle.textContent = production.title;
         modalBody.innerHTML = production.content;
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Impede rolagem do body
+        document.body.style.overflow = 'hidden';
     }
 }
 
 // Função para fechar o modal
 function closeModalFunc() {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restaura rolagem do body
+    document.body.style.overflow = 'auto';
 }
 
 // Função para calcular totais
@@ -284,7 +319,6 @@ function calculateTotals() {
     const totalPages = productions.reduce((sum, production) => sum + production.pages, 0);
     const totalWords = productions.reduce((sum, production) => sum + production.words, 0);
     
-    // Animar contadores
     animateCounter(pageCount, totalPages);
     animateCounter(wordCount, totalWords);
 }
@@ -331,11 +365,16 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Fechar menu ao redimensionar a tela (para mobile)
+// Fechar menu ao redimensionar a tela
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
         navMenu.classList.remove('active');
     }
+});
+
+// Permitir interação do usuário para desbloquear áudio
+document.addEventListener('click', () => {
+    userInteracted = true;
 });
 
 // Inicialização
@@ -343,11 +382,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProductions();
     calculateTotals();
     initTheme();
-    adjustVolume(); // Define volume inicial
+    adjustVolume();
     
-    // Configurar música para carregar
+    // Configurar música
+    backgroundMusic.volume = 0.5;
     backgroundMusic.load();
     
     console.log('Site carregado com sucesso!');
-    console.log('Para tocar a música, clique no botão de música no player ou no header.');
+    console.log('Clique no botão de música para reproduzir o áudio.');
 });
