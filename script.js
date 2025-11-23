@@ -4,7 +4,7 @@ const productions = [
         id: 1,
         title: "POR QUE OS PROCEDIMENTOS ESTÉTICOS ESTÃO AUMENTANDO ENTRE OS JOVENS?",
         description: "Análise sobre o crescimento da busca por procedimentos estéticos entre o público jovem e seus impactos sociais.",
-        image: "https://botoclinic.com/wp-content/uploads/2023/07/imagem-procedimento-estetico-na-boca.jpg",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção analisa o aumento significativo de procedimentos estéticos entre os jovens brasileiros. O trabalho explora fatores como influência das redes sociais, padrões de beleza contemporâneos e a busca por aceitação social.</p><p>A redação aborda também os riscos associados a essas intervenções quando realizadas sem orientação adequada e a importância da valorização da diversidade corporal.</p>",
         pages: 3,
         words: 1500
@@ -13,7 +13,7 @@ const productions = [
         id: 2,
         title: "ACESSIBILIDADE E INCLUSÃO DE PESSOAS COM DEFICIÊNCIA NO BRASIL",
         description: "Reflexão sobre os desafios e avanços na inclusão de pessoas com deficiência na sociedade brasileira.",
-        image: "https://blog.br.tkelevator.com/wp-content/uploads/2020/12/diversidade-e-inclusao-1140x725.png",
+        image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção discute a situação da acessibilidade e inclusão de pessoas com deficiência no Brasil. O texto aborda desde barreiras arquitetônicas até preconceitos sociais que dificultam a plena participação desses cidadãos na sociedade.</p><p>A redação também analisa a legislação brasileira sobre o tema e propõe medidas para promover uma sociedade verdadeiramente inclusiva.</p>",
         pages: 3,
         words: 1600
@@ -31,7 +31,7 @@ const productions = [
         id: 4,
         title: "AS MUDANÇAS CLIMÁTICAS NO BRASIL E SEUS DESAFIOS",
         description: "Análise dos impactos das mudanças climáticas no território brasileiro e os desafios para enfrentá-los.",
-        image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1569163139394-de44cb54d521?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção aborda as mudanças climáticas no contexto brasileiro, analisando seus efeitos em diferentes biomas e regiões do país. O texto discute eventos extremos, alterações nos padrões de chuva e impactos na agricultura.</p><p>A redação também propõe medidas de adaptação e mitigação que podem ser implementadas em nível nacional e local.</p>",
         pages: 3,
         words: 1800
@@ -40,7 +40,7 @@ const productions = [
         id: 5,
         title: "AS CONSEQUÊNCIAS DO DESCARTE DE LIXO ELETRÔNICO",
         description: "Reflexão sobre os impactos ambientais e sociais do descarte inadequado de resíduos eletrônicos.",
-        image: "https://www.ambientelegal.com.br/wp-content/uploads/lixoeletronico3-e1508111389938.jpg",
+        image: "https://images.unsplash.com/photo-1618477388957-7b5c0c6f39e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção analisa as consequências do descarte inadequado de lixo eletrônico, abordando desde a contaminação do solo e da água até os riscos à saúde humana.</p><p>O texto também discute a responsabilidade compartilhada entre fabricantes, governo e consumidores no gerenciamento adequado desses resíduos.</p>",
         pages: 3,
         words: 1600
@@ -58,7 +58,7 @@ const productions = [
         id: 7,
         title: "FATORES E EFEITOS DA DEPENDÊNCIA EM JOGOS DE APOSTAS NA WEB",
         description: "Reflexão sobre os fatores que levam à dependência em jogos de apostas online e seus efeitos na vida dos usuários.",
-        image: "https://www.conexasaude.com.br/blog/wp-content/uploads/2024/11/iStock-907044482-1-768x513.jpg",
+        image: "https://images.unsplash.com/photo-1593110121193-3c4a4a59a8cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção analisa os fatores psicológicos, sociais e econômicos que contribuem para a dependência em jogos de apostas online. O texto explora também os efeitos devastadores dessa dependência na vida financeira, familiar e profissional dos usuários.</p><p>A redação discute ainda a necessidade de regulamentação e políticas de prevenção para esse problema crescente.</p>",
         pages: 3,
         words: 1750
@@ -67,7 +67,7 @@ const productions = [
         id: 8,
         title: "A IMPORTÂNCIA DO TRABALHO VOLUNTÁRIO NO COMBATE ÀS DESIGUALDADES SOCIAIS",
         description: "Análise do papel do trabalho voluntário na redução das desigualdades sociais no Brasil.",
-        image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção discute a importância do trabalho voluntário como ferramenta de combate às desigualdades sociais. O texto aborda como iniciativas voluntárias podem complementar ações governamentais e promover transformação social.</p><p>A redação também reflete sobre os benefícios do voluntariado tanto para quem recebe quanto para quem oferece o serviço.</p>",
         pages: 3,
         words: 1650
@@ -76,7 +76,7 @@ const productions = [
         id: 9,
         title: "ADULTIZAÇÃO INFANTIL – CONSEQUÊNCIAS DA PERDA IRREPARÁVEL DA INFÂNCIA",
         description: "Reflexão sobre o fenômeno da adultização infantil e suas consequências no desenvolvimento das crianças.",
-        image: "https://images.educamaisbrasil.com.br/content/noticias/adultizacao-infantil-causas-impactos-e-como-proteger-as-criancas_g.jpg",
+        image: "https://images.unsplash.com/photo-1516627145497-ae69578a8d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção analisa o fenômeno da adultização infantil, explorando como a exposição precoce a responsabilidades, informações e comportamentos adultos pode impactar negativamente o desenvolvimento das crianças.</p><p>O texto discute também o papel da mídia, da publicidade e das redes sociais nesse processo e propõe caminhos para preservar a infância.</p>",
         pages: 3,
         words: 1700
@@ -85,7 +85,7 @@ const productions = [
         id: 10,
         title: "CAMINHOS PARA COMBATER O ETARISMO NAS RELAÇÕES SOCIAIS",
         description: "Análise do etarismo (idadeísmo) e propostas para combatê-lo nas relações sociais.",
-        image: "https://redacao.rhpravoce.com.br/wp-content/uploads/2023/03/Etarismo-como-combater-o-preconceito-de-idade.jpg",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção examina o etarismo - discriminação baseada na idade - e suas manifestações na sociedade contemporânea. O texto aborda estereótipos relacionados tanto a jovens quanto a idosos e seus impactos nas relações sociais.</p><p>A redação propõe caminhos para combater esse tipo de preconceito e promover uma sociedade mais inclusiva para todas as idades.</p>",
         pages: 3,
         words: 1600
@@ -103,7 +103,7 @@ const productions = [
         id: 12,
         title: "DESAFIOS PARA A VALORIZAÇÃO DA CULTURA POPULAR BRASILEIRA",
         description: "Análise dos desafios enfrentados para a preservação e valorização da cultura popular brasileira.",
-        image: "https://sopacultural.com/wp-content/uploads/2024/08/f2b44d3a-7b70-4987-b0a2-91b5f90fb1a1.webp",
+        image: "https://images.unsplash.com/photo-1485795959901-60c3d73cd1e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção examina os desafios para a valorização da cultura popular brasileira em um contexto de globalização e homogeneização cultural. O texto aborda desde a falta de incentivos até o desconhecimento da população sobre suas próprias tradições.</p><p>A redação propõe medidas para preservar e revitalizar manifestações culturais populares, reconhecendo sua importância para a identidade nacional.</p>",
         pages: 3,
         words: 1700
@@ -121,7 +121,7 @@ const productions = [
         id: 14,
         title: "O PAPEL DO ESPORTE COMO FERRAMENTA DE TRANSFORMAÇÃO SOCIAL",
         description: "Análise do potencial do esporte como instrumento de transformação e inclusão social.",
-        image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção examina o papel do esporte como ferramenta de transformação social, analisando como práticas esportivas podem promover inclusão, desenvolvimento de habilidades socioemocionais e construção de valores.</p><p>O texto discute também iniciativas esportivas que têm impactado positivamente comunidades vulneráveis e propõe formas de ampliar esse potencial transformador.</p>",
         pages: 3,
         words: 1650
@@ -130,7 +130,7 @@ const productions = [
         id: 15,
         title: "AS CONSEQUÊNCIAS DO DESCARTE DE LIXO ELETRÔNICO",
         description: "Reflexão sobre os impactos ambientais e sociais do descarte inadequado de resíduos eletrônicos.",
-        image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        image: "https://images.unsplash.com/photo-1618477388957-7b5c0c6f39e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
         content: "<p>Esta produção analisa as consequências do descarte inadequado de lixo eletrônico, abordando desde a contaminação do solo e da água até os riscos à saúde humana.</p><p>O texto também discute a responsabilidade compartilhada entre fabricantes, governo e consumidores no gerenciamento adequado desses resíduos.</p>",
         pages: 3,
         words: 1600
@@ -149,18 +149,28 @@ const productionCount = document.getElementById('production-count');
 const pageCount = document.getElementById('page-count');
 const wordCount = document.getElementById('word-count');
 const themeToggle = document.getElementById('theme-toggle');
+const musicToggle = document.getElementById('music-toggle');
+const miniMusicToggle = document.getElementById('mini-music-toggle');
+const volumeSlider = document.getElementById('volume-slider');
+const backgroundMusic = document.getElementById('background-music');
+const musicPlayer = document.getElementById('music-player');
+const playIcon = document.getElementById('play-icon');
+
+// Estado da música
+let isPlaying = false;
+let isExpanded = false;
 
 // Função para alternar modo claro/escuro
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle('light-mode');
     
     // Atualizar ícone do botão
-    if (document.body.classList.contains('dark-mode')) {
-        themeToggle.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-    } else {
-        themeToggle.textContent = '🌙';
+    if (document.body.classList.contains('light-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('theme', 'light');
+    } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', 'dark');
     }
 }
 
@@ -169,12 +179,39 @@ function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        document.body.classList.add('dark-mode');
-        themeToggle.textContent = '☀️';
+    if (savedTheme === 'light' || (!savedTheme && !systemPrefersDark)) {
+        document.body.classList.add('light-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     } else {
-        themeToggle.textContent = '🌙';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
     }
+}
+
+// Função para tocar/pausar música
+function toggleMusic() {
+    if (isPlaying) {
+        backgroundMusic.pause();
+        playIcon.className = 'fas fa-play';
+    } else {
+        backgroundMusic.play().catch(e => console.log("Autoplay bloqueado:", e));
+        playIcon.className = 'fas fa-pause';
+    }
+    isPlaying = !isPlaying;
+}
+
+// Função para expandir/contrair player de música
+function toggleMusicPlayer() {
+    if (isExpanded) {
+        musicPlayer.classList.remove('expanded');
+    } else {
+        musicPlayer.classList.add('expanded');
+    }
+    isExpanded = !isExpanded;
+}
+
+// Função para ajustar volume
+function adjustVolume() {
+    backgroundMusic.volume = volumeSlider.value / 100;
 }
 
 // Função para renderizar as produções
@@ -262,6 +299,11 @@ document.querySelectorAll('#nav-menu a').forEach(link => {
 // Event listeners
 closeModal.addEventListener('click', closeModalFunc);
 themeToggle.addEventListener('click', toggleTheme);
+musicToggle.addEventListener('click', toggleMusic);
+miniMusicToggle.addEventListener('click', toggleMusic);
+musicPlayer.addEventListener('click', toggleMusicPlayer);
+volumeSlider.addEventListener('input', adjustVolume);
+
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModalFunc();
@@ -273,4 +315,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProductions();
     calculateTotals();
     initTheme();
+    adjustVolume(); // Define volume inicial
 });
