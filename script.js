@@ -40,7 +40,7 @@ const productions = [
         id: 5,
         title: "AS CONSEQUÊNCIAS DO DESCARTE DE LIXO ELETRÔNICO",
         description: "Reflexão sobre os impactos ambientais e sociais do descarte inadequado de resíduos eletrônicos.",
-        image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        image: "https://www.ambientelegal.com.br/wp-content/uploads/lixoeletronico3-e1508111389938.jpg",
         content: "<p>Esta produção analisa as consequências do descarte inadequado de lixo eletrônico, abordando desde a contaminação do solo e da água até os riscos à saúde humana.</p><p>O texto também discute a responsabilidade compartilhada entre fabricantes, governo e consumidores no gerenciamento adequado desses resíduos.</p>",
         pages: 3,
         words: 1600
