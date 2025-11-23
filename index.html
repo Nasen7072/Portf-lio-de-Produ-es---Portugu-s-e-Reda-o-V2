@@ -3,101 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio Criativo - Português e Redação</title>
+    <title>Portfólio - Produções de Português e Redação</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container header-container">
+        <div class="container header-content">
             <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-pen-fancy"></i>
-                </div>
-                <div class="logo-text">
-                    <h1>Portfólio Criativo</h1>
-                    <p>Português & Redação</p>
-                </div>
+                <h1>Portfólio de Produções</h1>
+                <p>Língua Portuguesa e Redação</p>
             </div>
-            
             <nav>
+                <div class="hamburger" id="hamburger">☰</div>
                 <ul id="nav-menu">
                     <li><a href="#producoes">Produções</a></li>
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#contato">Contato</a></li>
+                    <li>
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Alternar modo claro/escuro">
+                            🌙
+                        </button>
+                    </li>
                 </ul>
             </nav>
-            
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content fade-in">
-                <h2>Minha Jornada Literária</h2>
-                <p>Um portfólio das 15 produções que marcaram meu desenvolvimento nas disciplinas de Língua Portuguesa e Redação ao longo deste ano letivo.</p>
-                <div class="hero-buttons">
-                    <a href="#producoes" class="btn btn-primary">
-                        <i class="fas fa-book-open"></i> Explorar Produções
-                    </a>
-                    <a href="#sobre" class="btn btn-secondary">
-                        <i class="fas fa-user"></i> Sobre o Projeto
-                    </a>
-                </div>
-            </div>
+            <h2>Produções de Português e Redação</h2>
+            <p>Um compilado das 15 produções realizadas ao longo do ano letivo, demonstrando o desenvolvimento das habilidades de escrita e interpretação textual.</p>
         </div>
     </section>
 
     <!-- Produções -->
     <section id="producoes">
         <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Minhas Produções</h2>
-                <p class="section-subtitle">Uma coleção dos trabalhos desenvolvidos ao longo do ano, demonstrando minha evolução na escrita e interpretação textual.</p>
-            </div>
-            
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all">Todas</button>
-                <button class="filter-btn" data-filter="redacao">Redações</button>
-                <button class="filter-btn" data-filter="analise">Análises</button>
-            </div>
-            
+            <h2 class="section-title">Minhas Produções</h2>
             <div class="productions-grid" id="productions-container">
-                <!-- Produções serão inseridas via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item fade-in">
-                    <div class="stat-number" id="production-count">15</div>
-                    <div class="stat-label">Produções Realizadas</div>
-                </div>
-                <div class="stat-item fade-in delay-1">
-                    <div class="stat-number" id="page-count">0</div>
-                    <div class="stat-label">Páginas Escritas</div>
-                </div>
-                <div class="stat-item fade-in delay-2">
-                    <div class="stat-number" id="word-count">0</div>
-                    <div class="stat-label">Palavras no Total</div>
-                </div>
-                <div class="stat-item fade-in delay-3">
-                    <div class="stat-number">A+</div>
-                    <div class="stat-label">Dedicação e Qualidade</div>
-                </div>
+                <!-- As produções serão inseridas aqui via JavaScript -->
             </div>
         </div>
     </section>
@@ -105,19 +51,34 @@
     <!-- Sobre -->
     <section id="sobre">
         <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Sobre Este Portfólio</h2>
-                <p class="section-subtitle">Conheça a trajetória e o propósito por trás deste projeto educacional.</p>
-            </div>
-            
+            <h2 class="section-title">Sobre o Portfólio</h2>
             <div class="about-content">
-                <div class="about-text fade-in">
-                    <p>Este portfólio representa uma jornada de aprendizado e crescimento nas disciplinas de Língua Portuguesa e Redação. Cada uma das 15 produções aqui apresentadas foi cuidadosamente desenvolvida ao longo do ano letivo, refletindo meu desenvolvimento como escritor, leitor e pensador crítico.</p>
-                    <p>Através da exploração de diversos gêneros textuais, da análise de obras literárias à produção de textos criativos, pude expandir meu repertório linguístico e aprimorar minhas habilidades de comunicação escrita.</p>
-                    <p>Este projeto não apenas demonstra meu progresso acadêmico, mas também celebra a importância da língua portuguesa como ferramenta de expressão, reflexão e transformação.</p>
+                <div class="about-text">
+                    <p>Este portfólio reúne as 15 produções desenvolvidas ao longo do ano letivo nas disciplinas de Língua Portuguesa e Redação. Cada trabalho representa uma etapa do meu desenvolvimento nas habilidades de leitura, interpretação e produção textual.</p>
+                    <p>Através destas produções, pude explorar diferentes gêneros textuais, técnicas de argumentação e elementos da língua portuguesa, consolidando meu aprendizado e demonstrando minha evolução como escritor e leitor crítico.</p>
                 </div>
-                <div class="about-image fade-in delay-1">
+                <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Estudante escrevendo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contador -->
+    <section class="counter">
+        <div class="container">
+            <div class="counter-content">
+                <div class="counter-item">
+                    <div class="counter-number" id="production-count">15</div>
+                    <div class="counter-label">Produções</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="page-count">0</div>
+                    <div class="counter-label">Páginas Escritas</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="word-count">0</div>
+                    <div class="counter-label">Palavras Escritas</div>
                 </div>
             </div>
         </div>
@@ -126,38 +87,15 @@
     <!-- Footer -->
     <footer id="contato">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>Portfólio Criativo</h3>
-                    <p>Um compilado das produções desenvolvidas nas disciplinas de Língua Portuguesa e Redação durante o ano letivo.</p>
-                    <div class="social-links">
-                        <a href="#" class="https://www.instagram.com/kaka.vtr.nk7/"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="https://github.com/Nasen7072"><i class="fab fa-github"></i></a>
-                        
-                    </div>
+            <div class="footer-content">
+                <p>Portfólio de Produções - Língua Portuguesa e Redação</p>
+                <p>Final do Ano Letivo</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Email">✉️</a>
+                    <a href="#" aria-label="LinkedIn">💼</a>
                 </div>
-                
-                <div class="footer-col">
-                    <h3>Navegação</h3>
-                    <ul class="footer-links">
-                        <li><a href="#producoes">Produções</a></li>
-                        <li><a href="#sobre">Sobre o Projeto</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h3>Contato</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> oliveira.santos.kaua@escola.pr.gov.br</li>
-                        <li><i class="fas fa-phone"></i> (55) 4199905-3605</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Brasil, Paraná, Curitiba </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; Kauã Vitor - Português e Redação. </p>
+                <p>&copy; Emily Roxo</p>
             </div>
         </div>
     </footer>
@@ -165,12 +103,8 @@
     <!-- Modal -->
     <div class="modal" id="production-modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modal-title">Título da Produção</h3>
-                <button class="close-modal" id="close-modal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2 id="modal-title">Título da Produção</h2>
             <div class="modal-body" id="modal-body">
                 <!-- Conteúdo será inserido via JavaScript -->
             </div>
