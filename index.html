@@ -16,7 +16,9 @@
                 <p>Língua Portuguesa e Redação</p>
             </div>
             <nav>
-                <div class="hamburger" id="hamburger">☰</div>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
                 <ul id="nav-menu">
                     <li><a href="#producoes">Produções</a></li>
                     <li><a href="#sobre">Sobre</a></li>
@@ -121,7 +123,9 @@
     <!-- Modal -->
     <div class="modal" id="production-modal">
         <div class="modal-content">
-            <button class="close-modal" id="close-modal">&times;</button>
+            <button class="close-modal" id="close-modal">
+                <i class="fas fa-times"></i>
+            </button>
             <h2 id="modal-title">Título da Produção</h2>
             <div class="modal-body" id="modal-body">
                 <!-- Conteúdo será inserido via JavaScript -->
@@ -129,9 +133,10 @@
         </div>
     </div>
 
-    <audio id="background-music" loop>
-        <source src="https://assets.codepen.io/1468070/lofi-study-1.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
+    <!-- Áudio com fonte alternativa -->
+    <audio id="background-music" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/11/22/audio_eb5dfb3d95.mp3?filename=lofi-chill-medium-version-159456.mp3" type="audio/mpeg">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-chill-abstract-loop-229.mp3" type="audio/mpeg">
     </audio>
 
     <script src="script.js"></script>
