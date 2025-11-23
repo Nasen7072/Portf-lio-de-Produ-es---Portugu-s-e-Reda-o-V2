@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função para tocar/pausar música
+    // Função para tocar/pausar música - CORRIGIDA
     function toggleMusic() {
         console.log('🎵 Botão de música clicado');
         
@@ -204,19 +204,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('⏸️ Música pausada');
         } else {
             // Tentar tocar música
-            console.log('▶️ Tentando reproduzir música...');
-            
-            // Primeiro, garantir que o áudio está carregado
-            if (elements.backgroundMusic.readyState < 3) {
-                console.log('🔄 Carregando áudio...');
-                elements.backgroundMusic.load();
-            }
+            console.log('▶️ Tentando reproduzir música local...');
             
             const playPromise = elements.backgroundMusic.play();
             
             if (playPromise !== undefined) {
                 playPromise.then(() => {
-                    console.log('✅ Música reproduzida com sucesso');
+                    console.log('✅ Música local reproduzida com sucesso');
                     updateMusicUI(true);
                     isPlaying = true;
                 }).catch(error => {
@@ -230,12 +224,59 @@ document.addEventListener('DOMContentLoaded', function() {
                             updateMusicUI(true);
                             isPlaying = true;
                             document.removeEventListener('click', retryPlay);
+                        }).catch(e => {
+                            console.error('❌ Falha na reprodução após interação:', e);
+                            showAudioError();
                         });
                     };
                     document.addEventListener('click', retryPlay, { once: true });
                 });
             }
         }
+    }
+
+    // Função para mostrar erro de áudio
+    function showAudioError() {
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+        `;
+        
+        overlay.innerHTML = `
+            <div style="background: var(--card-bg); padding: 2rem; border-radius: 12px; text-align: center; max-width: 400px; margin: 1rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔇</div>
+                <h3 style="color: var(--text-color); margin-bottom: 1rem;">Arquivo de Áudio Não Encontrado</h3>
+                <p style="color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.5;">
+                    Para que a música funcione, você precisa:
+                    <br><br>
+                    1. <strong>Renomear seu arquivo de áudio</strong> para "audio.mp3"
+                    <br>
+                    2. <strong>Colocar na mesma pasta</strong> do arquivo HTML
+                </p>
+                <button onclick="this.parentElement.parentElement.remove()" 
+                        style="background: var(--highlight-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
+                    Entendi
+                </button>
+            </div>
+        `;
+        
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.remove();
+            }
+        });
+        
+        document.body.appendChild(overlay);
     }
 
     // Função para atualizar a UI da música
@@ -265,7 +306,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para mostrar instruções de áudio
     function showMusicInstructions() {
-        // Criar overlay de instruções
         const overlay = document.createElement('div');
         overlay.style.cssText = `
             position: fixed;
@@ -288,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p style="color: var(--text-color); margin-bottom: 1.5rem; line-height: 1.5;">
                     Para reproduzir a música, você precisa interagir com a página primeiro.
                     <br><br>
-                    <strong>Clique em qualquer lugar desta mensagem para ativar o áudio.</strong>
+                    <strong>Clique em qualquer lugar para ativar o áudio.</strong>
                 </p>
                 <button onclick="this.parentElement.parentElement.remove()" 
                         style="background: var(--highlight-color); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; cursor: pointer; font-size: 1rem;">
@@ -297,10 +337,14 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         
-        // Remover overlay quando clicar nele
         overlay.addEventListener('click', function(e) {
             if (e.target === overlay) {
                 overlay.remove();
+                // Tentar reproduzir após clicar no overlay
+                elements.backgroundMusic.play().then(() => {
+                    updateMusicUI(true);
+                    isPlaying = true;
+                });
             }
         });
         
@@ -435,7 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initTheme();
         setupEventListeners();
         
-        // Configurar áudio
+        // Configurar áudio - CORRIGIDO
         if (elements.backgroundMusic) {
             // Definir volume inicial baseado no slider
             elements.backgroundMusic.volume = elements.volumeSlider.value / 100;
@@ -452,9 +496,11 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.backgroundMusic.addEventListener('error', (e) => {
                 console.error('❌ Erro no elemento de áudio:', e);
                 console.log('Código de erro:', elements.backgroundMusic.error);
+                console.log('💡 Dica: Renomeie seu arquivo para "audio.mp3" e coloque na mesma pasta do HTML');
             });
             
             console.log('🔊 Áudio configurado - Volume:', elements.backgroundMusic.volume);
+            console.log('📁 Fonte do áudio:', elements.backgroundMusic.src);
         } else {
             console.error('❌ Elemento background-music não encontrado');
         }
