@@ -801,3 +801,28 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: #d13453;
 }
+
+/* Estilo para mensagens de erro de música */
+.music-error {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Feedback visual para o player de música */
+.music-player.playing {
+    background: linear-gradient(135deg, var(--highlight-color), #4361ee);
+}
+
+.music-player.playing .mini-music-toggle {
+    color: white;
+}
