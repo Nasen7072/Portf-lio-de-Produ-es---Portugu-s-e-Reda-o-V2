@@ -687,3 +687,134 @@ footer {
         flex-direction: column;
     }
 }
+
+/* ===== TEMA ESCURO ===== */
+body.dark-theme {
+    --dark: #f8fafc;
+    --light: #0f172a;
+    --gray: #cbd5e1;
+    --gray-light: #1e293b;
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+body.dark-theme header {
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+body.dark-theme .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+body.dark-theme .production-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+body.dark-theme .card-title {
+    color: var(--dark);
+}
+
+body.dark-theme .card-description {
+    color: var(--gray);
+}
+
+body.dark-theme .card-meta {
+    color: var(--gray);
+}
+
+body.dark-theme .filter-btn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: var(--dark);
+}
+
+body.dark-theme .filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+body.dark-theme .btn-secondary {
+    background: #1e293b;
+    color: var(--dark);
+    border: 1px solid #334155;
+}
+
+body.dark-theme .btn-secondary:hover {
+    background: #334155;
+}
+
+body.dark-theme .card-btn-secondary {
+    background: #334155;
+    color: var(--dark);
+}
+
+body.dark-theme .card-btn-secondary:hover {
+    background: #475569;
+    color: white;
+}
+
+body.dark-theme .modal-content {
+    background: #1e293b;
+    color: var(--dark);
+}
+
+body.dark-theme .modal-title {
+    color: var(--dark);
+}
+
+body.dark-theme .close-modal {
+    color: var(--gray);
+}
+
+body.dark-theme .close-modal:hover {
+    color: var(--dark);
+}
+
+body.dark-theme .section-title {
+    color: var(--dark);
+}
+
+body.dark-theme .section-subtitle {
+    color: var(--gray);
+}
+
+body.dark-theme .about-text p {
+    color: var(--gray);
+}
+
+body.dark-theme nav a {
+    color: var(--dark);
+}
+
+body.dark-theme .hamburger {
+    color: var(--dark);
+}
+
+body.dark-theme .theme-toggle {
+    color: var(--gray);
+}
+
+body.dark-theme .theme-toggle:hover {
+    color: var(--primary);
+}
+
+/* Ajustes para elementos específicos no tema escuro */
+body.dark-theme .logo-text p {
+    color: var(--gray);
+}
+
+body.dark-theme .hero p {
+    color: var(--gray);
+}
+
+body.dark-theme .about-image img {
+    filter: brightness(0.8);
+}
