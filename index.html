@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio - Produções de Português e Redação</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
@@ -20,10 +21,16 @@
                     <li><a href="#producoes">Produções</a></li>
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#contato">Contato</a></li>
-                    <li>
+                    <li class="controls">
                         <button class="theme-toggle" id="theme-toggle" aria-label="Alternar modo claro/escuro">
-                            🌙
+                            <i class="fas fa-moon"></i>
                         </button>
+                        <button class="music-toggle" id="music-toggle" aria-label="Alternar música">
+                            <i class="fas fa-music"></i>
+                        </button>
+                        <div class="volume-control">
+                            <input type="range" min="0" max="100" value="50" class="volume-slider" id="volume-slider">
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -32,7 +39,7 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="container hero-content">
             <h2>Produções de Português e Redação</h2>
             <p>Um compilado das 15 produções realizadas ao longo do ano letivo, demonstrando o desenvolvimento das habilidades de escrita e interpretação textual.</p>
         </div>
@@ -91,14 +98,25 @@
                 <p>Portfólio de Produções - Língua Portuguesa e Redação</p>
                 <p>Final do Ano Letivo</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="Email">✉️</a>
-                    <a href="#" aria-label="LinkedIn">💼</a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 </div>
-                <p>&copy; Kauã Vitor N-23 3-D </p>
+                <p>&copy; Emily Roxo</p>
             </div>
         </div>
     </footer>
+
+    <!-- Music Player -->
+    <div class="music-player" id="music-player">
+        <div class="music-info">
+            <div class="music-title">LoFi Study</div>
+            <div class="music-artist">Chill Vibes</div>
+        </div>
+        <button class="music-toggle" id="mini-music-toggle">
+            <i class="fas fa-play" id="play-icon"></i>
+        </button>
+    </div>
 
     <!-- Modal -->
     <div class="modal" id="production-modal">
@@ -110,6 +128,11 @@
             </div>
         </div>
     </div>
+
+    <audio id="background-music" loop>
+        <source src="https://assets.codepen.io/1468070/lofi-study-1.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
 
     <script src="script.js"></script>
 </body>
