@@ -193,8 +193,20 @@ function toggleMusic() {
         backgroundMusic.pause();
         playIcon.className = 'fas fa-play';
     } else {
-        backgroundMusic.play().catch(e => console.log("Autoplay bloqueado:", e));
-        playIcon.className = 'fas fa-pause';
+        // Tentar tocar a música
+        const playPromise = backgroundMusic.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Reprodução iniciada com sucesso
+                playIcon.className = 'fas fa-pause';
+                isPlaying = true;
+            }).catch(error => {
+                // Autoplay foi bloqueado
+                console.log("Autoplay bloqueado:", error);
+                alert('Clique no botão de música para reproduzir o áudio. Alguns navegadores bloqueiam a reprodução automática.');
+            });
+        }
     }
     isPlaying = !isPlaying;
 }
@@ -205,6 +217,14 @@ function toggleMusicPlayer() {
         musicPlayer.classList.remove('expanded');
     } else {
         musicPlayer.classList.add('expanded');
+        
+        // Recolher automaticamente após 5 segundos
+        setTimeout(() => {
+            if (isExpanded) {
+                musicPlayer.classList.remove('expanded');
+                isExpanded = false;
+            }
+        }, 5000);
     }
     isExpanded = !isExpanded;
 }
@@ -304,9 +324,17 @@ miniMusicToggle.addEventListener('click', toggleMusic);
 musicPlayer.addEventListener('click', toggleMusicPlayer);
 volumeSlider.addEventListener('input', adjustVolume);
 
+// Fechar modal ao clicar fora
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeModalFunc();
+    }
+});
+
+// Fechar menu ao redimensionar a tela (para mobile)
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navMenu.classList.remove('active');
     }
 });
 
@@ -316,4 +344,10 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateTotals();
     initTheme();
     adjustVolume(); // Define volume inicial
+    
+    // Configurar música para carregar
+    backgroundMusic.load();
+    
+    console.log('Site carregado com sucesso!');
+    console.log('Para tocar a música, clique no botão de música no player ou no header.');
 });
