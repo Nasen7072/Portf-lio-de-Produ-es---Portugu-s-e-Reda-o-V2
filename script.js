@@ -159,7 +159,15 @@ const playIcon = document.getElementById('play-icon');
 // Estado da música
 let isPlaying = false;
 let isExpanded = false;
-let userInteracted = false;
+let audioContext = null;
+
+// Função para inicializar o contexto de áudio
+function initAudioContext() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioContext;
+}
 
 // Função para alternar modo claro/escuro
 function toggleTheme() {
@@ -189,41 +197,48 @@ function initTheme() {
 }
 
 // Função para tocar/pausar música
-function toggleMusic() {
-    if (!userInteracted) {
-        userInteracted = true;
-        // Criar contexto de áudio para desbloquear autoplay
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        oscillator.connect(audioContext.destination);
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 0.001);
-    }
-    
-    if (isPlaying) {
-        backgroundMusic.pause();
-        playIcon.className = 'fas fa-play';
-        musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-    } else {
-        const playPromise = backgroundMusic.play();
+async function toggleMusic() {
+    try {
+        // Inicializar contexto de áudio se necessário
+        initAudioContext();
         
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
+        if (audioContext.state === 'suspended') {
+            await audioContext.resume();
+        }
+
+        if (isPlaying) {
+            // Pausar música
+            backgroundMusic.pause();
+            playIcon.className = 'fas fa-play';
+            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            isPlaying = false;
+        } else {
+            // Tentar tocar música
+            const playPromise = backgroundMusic.play();
+            
+            if (playPromise !== undefined) {
+                await playPromise;
                 playIcon.className = 'fas fa-pause';
                 musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
                 isPlaying = true;
-            }).catch(error => {
-                console.log("Erro ao reproduzir áudio:", error);
-                showMusicError();
-            });
+            }
         }
+    } catch (error) {
+        console.error('Erro ao controlar áudio:', error);
+        showMusicError('Erro ao reproduzir áudio. Tente novamente.');
     }
-    isPlaying = !isPlaying;
 }
 
 // Função para mostrar erro de música
-function showMusicError() {
+function showMusicError(message) {
+    // Remover mensagens de erro anteriores
+    const existingError = document.querySelector('.music-error');
+    if (existingError) {
+        existingError.remove();
+    }
+
     const errorMsg = document.createElement('div');
+    errorMsg.className = 'music-error';
     errorMsg.style.cssText = `
         position: fixed;
         top: 20px;
@@ -234,16 +249,40 @@ function showMusicError() {
         border-radius: 8px;
         z-index: 3000;
         box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        max-width: 300px;
+        font-size: 0.9rem;
     `;
     errorMsg.innerHTML = `
-        <p><strong>Erro de Áudio</strong></p>
-        <p>Clique no botão de música para tentar novamente.</p>
+        <p style="margin: 0 0 0.5rem 0; font-weight: bold;">Erro de Áudio</p>
+        <p style="margin: 0;">${message}</p>
     `;
     document.body.appendChild(errorMsg);
     
     setTimeout(() => {
         errorMsg.remove();
     }, 5000);
+}
+
+// Função para criar áudio alternativo
+function createAlternativeAudio() {
+    // Criar um áudio simples usando Web Audio API como fallback
+    try {
+        const context = initAudioContext();
+        const oscillator = context.createOscillator();
+        const gainNode = context.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(context.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.value = 220;
+        gainNode.gain.value = 0.1;
+        
+        return { oscillator, gainNode, context };
+    } catch (error) {
+        console.error('Erro ao criar áudio alternativo:', error);
+        return null;
+    }
 }
 
 // Função para expandir/contrair player de música
@@ -372,9 +411,19 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Permitir interação do usuário para desbloquear áudio
-document.addEventListener('click', () => {
-    userInteracted = true;
+// Inicialização do áudio quando o usuário interage com a página
+document.addEventListener('click', async () => {
+    try {
+        // Tentar inicializar o contexto de áudio na primeira interação do usuário
+        if (!audioContext) {
+            initAudioContext();
+            if (audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+        }
+    } catch (error) {
+        console.log('Contexto de áudio não disponível:', error);
+    }
 });
 
 // Inicialização
@@ -382,11 +431,20 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProductions();
     calculateTotals();
     initTheme();
-    adjustVolume();
     
     // Configurar música
     backgroundMusic.volume = 0.5;
-    backgroundMusic.load();
+    backgroundMusic.preload = 'auto';
+    
+    // Configurar eventos de áudio para melhor tratamento de erros
+    backgroundMusic.addEventListener('error', (e) => {
+        console.error('Erro no elemento de áudio:', e);
+        showMusicError('Falha ao carregar o áudio. Verifique sua conexão.');
+    });
+    
+    backgroundMusic.addEventListener('canplaythrough', () => {
+        console.log('Áudio pronto para reprodução');
+    });
     
     console.log('Site carregado com sucesso!');
     console.log('Clique no botão de música para reproduzir o áudio.');
