@@ -5,12 +5,9 @@ const productions = [
         title: "POR QUE OS PROCEDIMENTOS ESTÉTICOS ESTÃO AUMENTANDO ENTRE OS JOVENS?",
         description: "Análise sobre o crescimento da busca por procedimentos estéticos entre o público jovem e seus impactos sociais.",
         image: "https://midias.em.com.br/_midias/jpg/2024/04/24/2150478728-36447503.jpg?20240424091845",
-        content: "<p>"Atualmente o padrão estético está sendo mais implantado como prioridades na mente dos demais jovens, o aumento do processamento estético entre jovens está ligado a diversos fatores, incluindo principalmente a pressão por padrões de belezas difundidos nas redes sociais e raízes sociais, a busca pela auto estima e ser socialmente aceito com a influência de tendências e modas.
- A exposição constante a imagens de corpos perfeitos ou retocados nas redes sociais cria uma padronização de beleza inatingível, causando muitos jovens a buscarem ou se aproximarem desse ideial.
-A adolescência é um Período de transformações Físicas e Psicológica, e a busca por processamentos estéticos pode ser uma forma de lidar com insatisfações e inseguranças relacionadas à aparência, buscando melhorar a autoestima e a autoconfiança.
- O bullying, especialmente relacionado à aparência física, pode ser um fator que leva alguns jovens a buscar procedimentos estéticos para se proteger de comentários e situações constrangedoras.
- A influência da mídia também é responsável, A mídia, com sua constante valorização da juventude e de corpos perfeitos, pode exercer grande pressão sobre os jovens, levando-os a buscar procedimentos estéticos para se adequar a esses padrões.
- Em resumo, o aumento de procedimentos estéticos entre jovens é um fenômeno complexo, influenciando por diversos fatores sociais, culturais e individuais. É importante que os jovens tenha acesso a informações claras e precisas sobre os riscos e benefícios desses procedimentos, além de desenvolverem uma redação saudável com sua própria imagem e autoestima."</p>",
+        content: "<p>"Esta produção analisa o aumento significativo de procedimentos estéticos entre os jovens brasileiros. O trabalho explora fatores como influência das redes sociais, padrões de beleza contemporâneos e a busca por aceitação social.
+
+A redação aborda também os riscos associados a essas intervenções quando realizadas sem orientação adequada e a importância da valorização da diversidade corporal."</p>",
         pages: 3,
         words: 1500
     },
